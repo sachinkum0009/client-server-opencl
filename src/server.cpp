@@ -10,7 +10,6 @@
  *
  */
 
-
 class Server
 {
 public:
@@ -22,7 +21,6 @@ public:
 			perror("socket failed");
 			exit(EXIT_FAILURE);
 		}
-
 	}
 	~Server()
 	{
