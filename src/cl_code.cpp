@@ -26,7 +26,7 @@ cl::Platform::get(&all_platforms);
     cl::Program::Sources sources;
  
     std::string kernel_code=
-            "   void kernel simple_add(global const int* vehicleDistance, global const int* safetyDistance, global bool* status){       "
+            "   void kernel distance_safety(global const int* vehicleDistance, global const int* safetyDistance, global bool* status){       "
             "           if(vehicleDistance[get_global_id(0)] > safetyDistance[get_global_id(0)]) {                         "
             "               status[get_global_id(0)] = true;                                            "
             "           }                                                                       "
@@ -65,12 +65,7 @@ void ClCode::distanceCompare(std::size_t numberOfVehicles, int vehicleDistances[
  
  
     //run the kernel
-    
-    // cl::KernelFunctor simple_add(cl::Kernel(program,"simple_add"),queue,cl::NullRange,cl::NDRange(10),cl::NullRange);
-    // simple_add(buffer_A,buffer_B,buffer_C);
- 
-    //alternative way to run the kernel
-    cl::Kernel kernel_add=cl::Kernel(*program,"simple_add");
+    cl::Kernel kernel_add=cl::Kernel(*program,"distance_safety");
     kernel_add.setArg(0,buffer_vehicleDistances);
     kernel_add.setArg(1,buffer_safetyDistances);
     kernel_add.setArg(2,buffer_status);
