@@ -78,8 +78,12 @@ public:
             send(sock, hello, strlen(hello), 0);
         }
 
+        std::string speed;
         for(std::size_t vehicleId = 0; vehicleId < numberOfVehicles; vehicleId++) {
-            std::cout << status[vehicleId] << std::endl;
+
+            speed = (status[vehicleId]) ? "Decelerate." : "Accelerate.";
+
+            std::cout << "Vehicle " << vehicleId << " should " << speed << std::endl;
         }
     }
 private:
